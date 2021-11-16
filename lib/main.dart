@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'thirdview.dart';
+import 'secondview.dart';
 
 void main() {
   runApp(LukasApp());
@@ -19,7 +19,8 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Att göra'),
+        centerTitle: true,
+        title: Text('TIG169: Att göra'),
         actions: [
           PopupMenuButton(
               itemBuilder: (context) => [
@@ -58,8 +59,8 @@ class MainView extends StatelessWidget {
       "Tänka",
       "Leka",
       "Träna",
-      "AAAAA",
-      "Hejhejehj",
+      "Sova",
+      "Jobba",
     ];
     return ListView.builder(
         itemCount: assignment.length,
@@ -78,7 +79,12 @@ class MainView extends StatelessWidget {
   Widget _listItems(assignmentTitle) {
     return ListTile(
       leading: MyCB(),
-      title: Text(assignmentTitle),
+      title: Text(
+        assignmentTitle,
+        style: TextStyle(
+          fontSize: 20,
+        ),
+      ),
       trailing: IconButton(
         icon: Icon(Icons.delete),
         onPressed: () {},
@@ -124,46 +130,5 @@ class _MyCBState extends State<MyCB> {
             _myBool = value;
           });
         });
-  }
-}
-
-class SecondView extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Lägg till projekt'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.arrow_right),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ThirdView()));
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.all(20),
-              child: TextField(
-                decoration: InputDecoration(hintText: 'Nytt projekt'),
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Icon(Icons.add),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Text('Lägg till'),
-            )
-          ],
-        ),
-      ),
-    );
   }
 }
