@@ -59,6 +59,7 @@ class MainView extends StatelessWidget {
       "Leka",
       "Träna",
       "AAAAA",
+      "Hejhejehj",
     ];
     return ListView.builder(
         itemCount: assignment.length,
