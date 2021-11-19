@@ -14,28 +14,33 @@ class TasksList extends StatelessWidget {
 
   Widget _taskItem(context, task) {
     var state = Provider.of<MyState>(context, listen: false);
-    return CheckboxListTile(
-      title: Text(
-        task.message,
-        style: (TextStyle(
-          fontSize: 20,
-          decoration: task.isCompleted ? TextDecoration.lineThrough : null,
-          decorationThickness: 2,
-        )),
-      ),
-      secondary: IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: () {
-          var state = Provider.of<MyState>(context, listen: false);
-          state.removeTask(task);
-        },
-      ),
-      controlAffinity: ListTileControlAffinity.leading,
-      value: task.isCompleted,
-      onChanged: (value) {
-        state.isCompleted(task);
-      },
-    );
+    return Container(
+        padding: EdgeInsets.only(),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blueGrey),
+        ),
+        child: CheckboxListTile(
+          title: Text(
+            task.message,
+            style: (TextStyle(
+              fontSize: 20,
+              decoration: task.isCompleted ? TextDecoration.lineThrough : null,
+              decorationThickness: 1,
+            )),
+          ),
+          secondary: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              var state = Provider.of<MyState>(context, listen: false);
+              state.removeTask(task);
+            },
+          ),
+          controlAffinity: ListTileControlAffinity.leading,
+          value: task.isCompleted,
+          onChanged: (value) {
+            state.isCompleted(task);
+          },
+        ));
   }
 }
 

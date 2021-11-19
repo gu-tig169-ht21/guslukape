@@ -20,14 +20,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter demo',
       theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          dividerTheme: DividerThemeData(
-              space: 50,
-              thickness: 10,
-              color: Colors.grey,
-              indent: 20,
-              endIndent: 20)),
+        primarySwatch: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: MainView(),
     );
   }
