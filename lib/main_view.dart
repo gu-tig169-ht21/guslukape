@@ -8,6 +8,7 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('TIG169: Att göra'),
         actions: [
           PopupMenuButton(
@@ -33,9 +34,10 @@ class MainView extends StatelessWidget {
           var newItem = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddNewTaskView(NewTask(message: ''))));
+                  builder: (context) =>
+                      AddNewTaskView(NewTask(message: 'message', id: ''))));
           if (newItem != null) {
-            Provider.of<MyState>(context, listen: false).addTask(newItem);
+            Provider.of<MyState>(context, listen: false).addingTask(newItem);
           }
         },
       ),

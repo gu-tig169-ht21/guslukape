@@ -9,10 +9,11 @@ class TasksList extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ListView(
-        children: list.map((task) => _taskItem(context, task)).toList());
+        children:
+            list.map((NewTask task) => _taskItem(context, task)).toList());
   }
 
-  Widget _taskItem(context, task) {
+  Widget _taskItem(context, NewTask task) {
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
         padding: EdgeInsets.only(),
@@ -31,24 +32,14 @@ class TasksList extends StatelessWidget {
           secondary: IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              var state = Provider.of<MyState>(context, listen: false);
               state.removeTask(task);
             },
           ),
           controlAffinity: ListTileControlAffinity.leading,
           value: task.isCompleted,
           onChanged: (value) {
-            state.isCompleted(task);
+            state.updatingTask(task);
           },
         ));
-  }
-}
-
-class TaskView extends StatelessWidget {
-  final NewTask task;
-  TaskView(this.task);
-
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar());
   }
 }

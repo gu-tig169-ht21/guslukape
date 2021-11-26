@@ -2,25 +2,21 @@ import 'package:flutter/material.dart';
 import './model.dart';
 
 class AddNewTaskView extends StatefulWidget {
-  final NewTask task;
-
-  AddNewTaskView(this.task);
+  final NewTask message;
+  AddNewTaskView(this.message);
 
   @override
   State<StatefulWidget> createState() {
-    return AddNewTaskViewState(task);
+    return AddNewTaskViewState(message);
   }
 }
 
 class AddNewTaskViewState extends State<AddNewTaskView> {
-  late String message;
-
-  late TextEditingController textEditingController;
+  String message = 'message';
+  TextEditingController textEditingController = TextEditingController();
 
   AddNewTaskViewState(NewTask task) {
     this.message = task.message;
-
-    textEditingController = TextEditingController(text: task.message);
 
     textEditingController.addListener(() {
       setState(() {
@@ -35,7 +31,7 @@ class AddNewTaskViewState extends State<AddNewTaskView> {
           FlatButton(
             child: Text('Spara', style: TextStyle(color: Colors.white)),
             onPressed: () {
-              Navigator.pop(context, NewTask(message: message));
+              Navigator.pop(context, NewTask(message: message, id: ''));
             },
           )
         ]),
