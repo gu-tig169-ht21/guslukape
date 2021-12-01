@@ -3,7 +3,7 @@ import './model.dart';
 
 class AddNewTaskView extends StatefulWidget {
   final NewTask message;
-  AddNewTaskView(this.message);
+  const AddNewTaskView(this.message);
 
   @override
   State<StatefulWidget> createState() {
@@ -27,9 +27,9 @@ class AddNewTaskViewState extends State<AddNewTaskView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Lägg till nytt todo'), actions: [
-          FlatButton(
-            child: Text('Spara', style: TextStyle(color: Colors.white)),
+        appBar: AppBar(title: const Text('Lägg till nytt todo'), actions: [
+          ElevatedButton(
+            child: const Text('Spara', style: TextStyle(color: Colors.white)),
             onPressed: () {
               Navigator.pop(context, NewTask(message: message, id: ''));
             },
@@ -46,18 +46,16 @@ class AddNewTaskViewState extends State<AddNewTaskView> {
                 controller: textEditingController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                     filled: true,
                     contentPadding: EdgeInsets.all(16),
-                    fillColor: Colors.blueGrey,
                     hintText: 'Vad ska vi göra nu?',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                         fontStyle: FontStyle.italic,
-                        color: Colors.white,
+                        color: Colors.blueGrey,
                         fontWeight: FontWeight.bold)),
               ),
-              //NewTaskPreview(NewTask(message: this.message)),
             ])));
   }
 }
