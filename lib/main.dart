@@ -10,19 +10,21 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => state,
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter demo',
       theme: ThemeData(
-        textTheme: GoogleFonts.promptTextTheme(
+        textTheme: GoogleFonts.arimoTextTheme(
           Theme.of(context).textTheme,
         ),
         primarySwatch: Colors.blueGrey,

@@ -22,7 +22,7 @@ class MainView extends StatelessWidget {
               elevation: 40,
               shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.black, width: 2),
+                borderSide: const BorderSide(color: Colors.black, width: 2),
               ),
               itemBuilder: (context) => [
                     const PopupMenuItem(
@@ -39,7 +39,7 @@ class MainView extends StatelessWidget {
             TasksList(_filterList(state.list, state.filterBy)),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () async {
           var newItem = await Navigator.push(
               context,

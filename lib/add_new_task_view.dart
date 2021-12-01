@@ -49,7 +49,7 @@ class AddNewTaskViewState extends State<AddNewTaskView> {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     filled: true,
-                    contentPadding: EdgeInsets.all(16),
+                    contentPadding: const EdgeInsets.all(16),
                     hintText: 'Vad ska vi göra nu?',
                     hintStyle: const TextStyle(
                         fontStyle: FontStyle.italic,
