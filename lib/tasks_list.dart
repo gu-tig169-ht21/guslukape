@@ -5,50 +5,46 @@ import 'model.dart';
 class TasksList extends StatelessWidget {
   final List<NewTask> list;
 
-  TasksList(this.list);
+  const TasksList(this.list, {Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return ListView(
-        children: list.map((task) => _taskItem(context, task)).toList());
+        children:
+            list.map((NewTask task) => _taskItem(context, task)).toList());
   }
 
-  Widget _taskItem(context, task) {
+  Widget _taskItem(context, NewTask task) {
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
-        padding: EdgeInsets.only(),
-        decoration: BoxDecoration(
+      margin: const EdgeInsets.all(3),
+      padding: const EdgeInsets.only(),
+      decoration: BoxDecoration(
           border: Border.all(color: Colors.blueGrey),
+          borderRadius: const BorderRadius.all(Radius.circular(50))),
+      child: CheckboxListTile(
+        title: Text(
+          task.message,
+          style: (TextStyle(
+            fontSize: 20,
+            decoration: task.isCompleted ? TextDecoration.lineThrough : null,
+            decorationThickness: 1,
+          )),
         ),
-        child: CheckboxListTile(
-          title: Text(
-            task.message,
-            style: (TextStyle(
-              fontSize: 20,
-              decoration: task.isCompleted ? TextDecoration.lineThrough : null,
-              decorationThickness: 1,
-            )),
-          ),
-          secondary: IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              var state = Provider.of<MyState>(context, listen: false);
-              state.removeTask(task);
-            },
-          ),
-          controlAffinity: ListTileControlAffinity.leading,
-          value: task.isCompleted,
-          onChanged: (value) {
-            state.isCompleted(task);
+        secondary: IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: () {
+            state.removeTask(task);
           },
-        ));
-  }
-}
-
-class TaskView extends StatelessWidget {
-  final NewTask task;
-  TaskView(this.task);
-
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar());
+        ),
+        controlAffinity: ListTileControlAffinity.leading,
+        value: task.isCompleted,
+        onChanged: (value) {
+          state.updatingTask(task);
+        },
+        activeColor: Colors.blueGrey[200],
+        checkColor: Colors.greenAccent[400],
+      ),
+    );
   }
 }

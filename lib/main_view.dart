@@ -5,21 +5,32 @@ import 'add_new_task_view.dart';
 import 'model.dart';
 
 class MainView extends StatelessWidget {
+  const MainView({Key? key}) : super(key: key);
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TIG169: Att göra'),
+        centerTitle: true,
+        title: const Text('TIG169: Att göra'),
         actions: [
           PopupMenuButton(
               onSelected: (int value) {
-                if (value != null)
-                  Provider.of<MyState>(context, listen: false)
-                      .setFilterBy(value);
+                Provider.of<MyState>(context, listen: false).setFilterBy(value);
               },
+              color: Colors.blueGrey[200],
+              elevation: 40,
+              shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.black, width: 2),
+              ),
               itemBuilder: (context) => [
-                    PopupMenuItem(child: Text('Alla uppgifter'), value: 1),
-                    PopupMenuItem(child: Text('Färdiga uppgifter'), value: 2),
-                    PopupMenuItem(child: Text('Ofärdiga uppgifter'), value: 3)
+                    const PopupMenuItem(
+                        child: Text('Alla uppgifter'), value: 1),
+                    const PopupMenuItem(
+                        child: Text('Färdiga uppgifter'), value: 2),
+                    const PopupMenuItem(
+                        child: Text('Ofärdiga uppgifter'), value: 3)
                   ]),
         ],
       ),
@@ -28,14 +39,15 @@ class MainView extends StatelessWidget {
             TasksList(_filterList(state.list, state.filterBy)),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () async {
           var newItem = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddNewTaskView(NewTask(message: ''))));
+                  builder: (context) =>
+                      AddNewTaskView(NewTask(message: '', id: ''))));
           if (newItem != null) {
-            Provider.of<MyState>(context, listen: false).addTask(newItem);
+            Provider.of<MyState>(context, listen: false).addingTask(newItem);
           }
         },
       ),
@@ -44,10 +56,11 @@ class MainView extends StatelessWidget {
 
   List<NewTask> _filterList(list, value) {
     if (value == 1) return list;
-    if (value == 2)
+    if (value == 2) {
       return list.where((task) => task.isCompleted == true).toList();
-    else if (value == 3)
+    } else if (value == 3) {
       return list.where((task) => task.isCompleted == false).toList();
+    }
 
     return list;
   }

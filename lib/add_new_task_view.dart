@@ -2,25 +2,21 @@ import 'package:flutter/material.dart';
 import './model.dart';
 
 class AddNewTaskView extends StatefulWidget {
-  final NewTask task;
-
-  AddNewTaskView(this.task);
+  final NewTask message;
+  const AddNewTaskView(this.message);
 
   @override
   State<StatefulWidget> createState() {
-    return AddNewTaskViewState(task);
+    return AddNewTaskViewState(message);
   }
 }
 
 class AddNewTaskViewState extends State<AddNewTaskView> {
-  late String message;
-
-  late TextEditingController textEditingController;
+  String message = 'message';
+  TextEditingController textEditingController = TextEditingController();
 
   AddNewTaskViewState(NewTask task) {
     this.message = task.message;
-
-    textEditingController = TextEditingController(text: task.message);
 
     textEditingController.addListener(() {
       setState(() {
@@ -31,11 +27,11 @@ class AddNewTaskViewState extends State<AddNewTaskView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Lägg till nytt todo'), actions: [
-          FlatButton(
-            child: Text('Spara', style: TextStyle(color: Colors.white)),
+        appBar: AppBar(title: const Text('Lägg till nytt todo'), actions: [
+          ElevatedButton(
+            child: const Text('Spara', style: TextStyle(color: Colors.white)),
             onPressed: () {
-              Navigator.pop(context, NewTask(message: message));
+              Navigator.pop(context, NewTask(message: message, id: ''));
             },
           )
         ]),
@@ -50,18 +46,16 @@ class AddNewTaskViewState extends State<AddNewTaskView> {
                 controller: textEditingController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                     filled: true,
-                    contentPadding: EdgeInsets.all(16),
-                    fillColor: Colors.blueGrey,
+                    contentPadding: const EdgeInsets.all(16),
                     hintText: 'Vad ska vi göra nu?',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                         fontStyle: FontStyle.italic,
-                        color: Colors.white,
+                        color: Colors.blueGrey,
                         fontWeight: FontWeight.bold)),
               ),
-              //NewTaskPreview(NewTask(message: this.message)),
             ])));
   }
 }
